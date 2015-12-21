@@ -1,0 +1,141 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+.navbar-brand {
+  font-family: 'Lobster', cursive;
+}
+
+.navbar-brand img {
+  max-height: 100%;
+  float: left;
+}
+
+.main-container {
+  padding-top: 2%;
+  padding-bottom: 5%;
+}
+
+.board {
+  width: 480px;
+  margin: auto;
+}
+
+.board-border {
+  background-color: #ddd;
+  width: 510px;
+  height: 515px;
+  margin: auto;
+  padding-top: 20px;
+}
+
+.board-row {
+  width: 100%;
+  display: table-row;
+}
+
+.cell {
+  min-height: 60px;
+  min-width: 60px;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.cell.b {
+  background-color: #808080;
+}
+
+.cell.w {
+  background-color: #ffffff;
+}
+
+.shadow {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.shadow2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.cell.king_b {
+  background-image: url("../assets/king_b.png");
+}
+
+.cell.king_w {
+  background-image: url("../assets/king_w.png");
+}
+
+.cell.queen_b {
+  background-image: url("../assets/queen_b.png");
+}
+
+.cell.queen_w {
+  background-image: url("../assets/queen_w.png");
+}
+
+.cell.bishop_b {
+  background-image: url("../assets/bishop_b.png");
+}
+
+.cell.bishop_w {
+  background-image: url("../assets/bishop_w.png");
+}
+
+.cell.tower_b {
+  background-image: url("../assets/tower_b.png");
+}
+
+.cell.tower_w {
+  background-image: url("../assets/tower_w.png");
+}
+
+.cell.pawn_b {
+  background-image: url("../assets/pawn_b.png");
+}
+
+.cell.pawn_w {
+  background-image: url("../assets/pawn_w.png");
+}
+
+.cell.knight_b {
+  background-image: url("../assets/knight_b.png");
+}
+
+.cell.knight_w {
+  background-image: url("../assets/knight_w.png");
+}
+
+.selected {
+  box-shadow: inset 0 0 50px #ff9900;
+  cursor: pointer;
+}
+
+.available {
+  box-shadow: inset 0 0 50px #3399ff;
+  cursor: pointer;
+}
+
+.figure {
+  cursor: pointer;
+}
+
+.copyright {
+  text-align: center;
+}
+
+.powered {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.powered a {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.powered a:hover {
+  text-decoration: none;
+}
+
+.powered img {
+  height: 50px;
+}

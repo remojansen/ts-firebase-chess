@@ -1,0 +1,30 @@
+{
+  "name": "ts-firebase-chess",
+  "version": "1.0.0",
+  "description": "Chess game implemented with typescript and firebase",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remojansen/ts-firebase-chess.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Remo H. Jansen <remo.jansen@wolksoftware.com> (http://www.remojansen.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.10.0",
+    "gulp-webserver": "^0.9.1",
+    "tsify": "^0.13.1",
+    "typescript": "^1.7.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "firebase": "^2.3.2",
+    "jquery": "^2.1.4"
+  }
+}

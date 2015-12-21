@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TsChess</title>
+    <link rel="shortcut icon" type="image/png" href="./assets/knight_b.png"/>
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./style/app.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="header"></div>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="main-container">
+          <div id="app"><!-- main container --></div>
+        </div>
+        <div class="powered">
+          <div>
+            <p>Powered by</p>
+          </div>
+          <div>
+            <a href="http://www.typescriptlang.org/">
+              <img src="./assets/typescript_logo.png"/>
+            </a>
+            <a href="https://www.firebase.com">
+              <img src="./assets/firebase_logo.png"/>
+            </a>
+          </div>
+        </div>
+        <div id="footer"></div>
+        <div id="modal"></div>
+      </div>
+    </div>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./dist/bundle.js"></script>
+  </body>
+</html>
