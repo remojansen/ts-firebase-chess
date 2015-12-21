@@ -96,7 +96,7 @@ export function getDefaultBlackFigures() : IFigure[] {
 
 export function selectFigure(state : IChessGameProps, action) {
 
-  var figures = (state.isPlayerOne) ? state.player1Figures : state.player2Figures;
+  var figures = (state.playerColor === CONST.WHITE) ? state.player1Figures : state.player2Figures;
   var figure = figures.filter((f) => { return f.id === action.guid })[0];
   var alreadySelected = figure.selected;
 
@@ -113,22 +113,21 @@ export function selectFigure(state : IChessGameProps, action) {
   var board = newBoard();
 
   if(alreadySelected === false) {
-    if(state.isPlayerOne) {
-      player1Figures = player1Figures.map((f) => {
-        if(f.id === action.guid) {
-          f.selected = true;
-        }
-        return f;
-      });
-    }
-    else {
-      player2Figures = player2Figures.map((f) => {
-        if(f.id === action.guid) {
-          f.selected = true;
-        }
-        return f;
-      });
-    }
+
+    player1Figures = player1Figures.map((f) => {
+      if(f.id === action.guid) {
+        f.selected = true;
+      }
+      return f;
+    });
+
+    player2Figures = player2Figures.map((f) => {
+      if(f.id === action.guid) {
+        f.selected = true;
+      }
+      return f;
+    });
+
   }
 
   // add
@@ -137,9 +136,10 @@ export function selectFigure(state : IChessGameProps, action) {
   board = flagAvailableCells(board, player1Figures.concat(player2Figures));
 
   return {
+    lastMove : state.lastMove,
     gameID : state.gameID,
     playerID : state.playerID,
-    isPlayerOne : state.isPlayerOne,
+    playerColor : state.playerColor,
     board : board,
     player1Figures : player1Figures,
     player2Figures : player2Figures
@@ -363,9 +363,6 @@ export function getFigureAvailableMoves(figure : IFigure, board : ICell[][]) : I
 
 export function moveFigure(state : IChessGameProps, action) {
 
-    var playerFigures = (state.isPlayerOne) ? state.player1Figures : state.player2Figures;
-    var selectedFigure = playerFigures.filter((f) => { return f.id === action.guid })[0];
-
     // stop displaying available moves in board
     var player1Figures = state.player1Figures.map((figure) => {
       figure.selected = false; return figure;
@@ -379,17 +376,17 @@ export function moveFigure(state : IChessGameProps, action) {
     var board = newBoard();
 
     // move figure
-    if(state.isPlayerOne) {
+    if(action.figure.color === CONST.WHITE) {
       player1Figures = player1Figures.map((f) => {
-        if(f.id === action.guid) {
-          f.position = action.position;
-          f.hasMoved = true;
+        if(f.id === action.figure.id) {
+          f.position = action.figure.position;
+          f.hasMoved = action.figure.hasMoved;
         }
         return f;
       });
       // kill figure
       player2Figures = player2Figures.map((f) => {
-        if(f.position.x === action.position.x && f.position.y === action.position.y) {
+        if(f.position.x === action.figure.position.x && f.position.y === action.figure.position.y) {
           f.alive = false;
         }
         return f;
@@ -397,15 +394,15 @@ export function moveFigure(state : IChessGameProps, action) {
     }
     else {
       player2Figures = player2Figures.map((f) => {
-        if(f.id === action.guid) {
-          f.position = action.position;
-          f.hasMoved = true;
+        if(f.id === action.figure.id) {
+          f.position = action.figure.position;
+          f.hasMoved = action.figure.hasMoved;
         }
         return f;
       });
       // kill figure
       player1Figures = player1Figures.map((f) => {
-        if(f.position.x === action.position.x && f.position.y === action.position.y) {
+        if(f.position.x === action.figure.position.x && f.position.y === action.figure.position.y) {
           f.alive = false;
         }
         return f;
@@ -417,9 +414,10 @@ export function moveFigure(state : IChessGameProps, action) {
     board = positionFigures(board, player2Figures);
 
     return {
+      lastMove : (state.lastMove === CONST.WHITE) ? CONST.BLACK : CONST.WHITE,
       gameID : state.gameID,
       playerID : state.playerID,
-      isPlayerOne : state.isPlayerOne,
+      playerColor : state.playerColor,
       board : board,
       player1Figures : player1Figures,
       player2Figures : player2Figures

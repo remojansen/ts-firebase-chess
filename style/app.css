@@ -139,3 +139,8 @@
 .powered img {
   height: 50px;
 }
+
+.turn {
+  text-align: center;
+  padding-bottom: 20px;
+}

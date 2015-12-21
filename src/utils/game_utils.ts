@@ -1,5 +1,6 @@
 ///<reference path="../interfaces/interfaces.d.ts" />
 
+import * as CONST from "../constants/chess";
 import { Modal } from "../components/modal";
 
 function displayModal(text) {
@@ -41,18 +42,23 @@ function initGame(lobbyRef) {
     // new game
     var gameID = guid();
     var player1ID = guid();
-    window.location.hash = guid();
-    lobbyRef.push({ id : gameID, player1 : player1ID, player2 : null });
+    window.location.hash = gameID;
+    lobbyRef.child(gameID).set({
+      player1 : player1ID,
+      player2 : "null"
+    });
     displayModal(`Invite a friend to join by sharing the following link: ${window.location.href}`);
-    return { gameID : gameID, playerID : player1ID, isPlayerOne : true };
+    return { gameID : gameID, playerID : player1ID, playerColor : CONST.WHITE };
   }
   else {
 
     // Join game
     var player2ID = guid();
-    lobbyRef.update({ player2 : player2ID });
+    lobbyRef.child(gameID).update({
+      player2 : player2ID
+    });
     displayModal(`You have successfully joined a game!`);
-    return { gameID : gameID, playerID : player2ID, isPlayerOne : false };
+    return { gameID : gameID, playerID : player2ID, playerColor : CONST.BLACK };
   }
 }
 

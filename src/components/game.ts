@@ -22,7 +22,16 @@ class ChessGame extends Component<IChessGameProps> {
       x : $cell.data("index"),
       y : $cell.parent().data("index")
     };
-    var moveAction = actions.moveFigure(guid, position);
+
+    var figures = (this.props.playerColor === CONST.WHITE) ? this.props.player1Figures : this.props.player2Figures;
+    var figure = figures.filter((f) => { return f.id === guid })[0];
+    figure = (<any>Object).assign({}, figure);
+    figure.position = position;
+    figure.hasMoved = true;
+
+    var moveAction = actions.postMoveFigure(
+      this.props.gameID, figure
+    );
     store.publish(moveAction);
   }
 
@@ -44,13 +53,17 @@ class ChessGame extends Component<IChessGameProps> {
 
   public render() : string {
 
-    var renderCell = (playerColor, cell, cellIndex) => {
+    var renderCell = (cell, cellIndex) => {
+
       var classes = "";
       var figureId = "";
+      var playerColor = this.props.playerColor;
+      var lastMove = this.props.lastMove;
+
       if(cell.figure !== null && cell.figure.alive === true) {
         classes += `${cell.figure.type}_${cell.figure.color}`;
         figureId = cell.figure.id;
-        if(cell.figure.color === playerColor) {
+        if(cell.figure.color === playerColor && lastMove !== playerColor) {
           classes += " figure";
         }
         if(cell.figure.selected === true) {
@@ -65,27 +78,38 @@ class ChessGame extends Component<IChessGameProps> {
              </div>`;
     };
 
-    var renderRow = (playerColor, row, rowIndex) => {
+    var renderRow = (row, rowIndex) => {
       var cellsHtml = row.map(function(cell, cellIndex) {
-        return renderCell(playerColor, cell, cellIndex);
+        return renderCell(cell, cellIndex);
       }).join("\n");
       return `<div class="board-row" data-index="${rowIndex}">${cellsHtml}</div>`;
     };
 
-    var renderBoard = (playerColor, board) => {
+    var renderNextTrun = () => {
+      if(this.props.playerColor === this.props.lastMove) {
+        return `Plase wait...`
+      }
+      else {
+        return `Plase move...`;
+      }
+    }
+
+    var renderBoard = (board) => {
       var rowsHtml = board.map(function(row, rowIndex, rows) {
-        return renderRow(playerColor, row, rowIndex);
+        return renderRow(row, rowIndex);
       }).join("\n");
-      return `<div class="board-border shadow2">
+
+      var turn = renderNextTrun()
+
+      return `<div class="turn">${turn}</div>
+              <div class="board-border shadow2">
                 <div class="board shadow">
                   ${rowsHtml}
                 </div>
               </div>`;
     };
 
-    // Player one is black
-    var playerColor = this.props.isPlayerOne ? CONST.WHITE : CONST.BLACK;
-    return renderBoard(playerColor, this.props.board);
+    return renderBoard(this.props.board);
   }
 }
 

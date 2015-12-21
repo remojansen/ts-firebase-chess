@@ -11,6 +11,7 @@ class Store {
   }
 
   public getState() : any {
+    // return current state or default state
     return this._state;
   }
 

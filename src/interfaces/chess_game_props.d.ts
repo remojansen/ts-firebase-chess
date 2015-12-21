@@ -2,9 +2,10 @@
 ///<reference path="./figure.d.ts" />
 
 interface IChessGameProps {
+  lastMove : string,
   gameID : string,
   playerID : string,
-  isPlayerOne : boolean,
+  playerColor : string,
   board : ICell[][],
   player1Figures : IFigure[],
   player2Figures : IFigure[]
