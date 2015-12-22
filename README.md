@@ -5,4 +5,4 @@ The application uses a custom framework based on React and Redux.
 
 ![](https://raw.githubusercontent.com/remojansen/ts-firebase-chess/master/assets/ExFJBZ4kVB.gif)
 
-Please note: this application was developed in a 24h hackathon and a s a result it is not fully completed.
+Please note: this application was developed in a 24h hackathon and as a result it is not fully completed.
