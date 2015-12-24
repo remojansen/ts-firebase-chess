@@ -34,7 +34,7 @@ var state = store.getState();
 
 if(state.playerColor === CONST.WHITE) {
 
-  // Send default figures to server to server
+  // Send default figures to server
   state.player1Figures.forEach((p1f) => {
     var moveAction = actions.postMoveFigure(
       state.gameID, p1f
@@ -52,7 +52,7 @@ if(state.playerColor === CONST.WHITE) {
 }
 else {
 
-  // Read default figures from server to server
+  // Read default figures from server
   var URL = `https://boiling-torch-2871.firebaseio.com/game-${state.gameID}.json`
   $.getJSON(URL, function (data) {
     var player1Figures = [];
